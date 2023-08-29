@@ -1,3 +1,4 @@
+// add wow class for animated items
 const animItems = () => {
   const animItems = document.querySelectorAll('[data-animate]')
   if (animItems.length) {
@@ -6,10 +7,23 @@ const animItems = () => {
     })
   }
 }
-if (!document.getElementById('fullpage')) {
-  animItems()
+
+// dynamically change video source
+const addSourceToVideo = (element, src) => {
+  const source = document.createElement('source')
+  source.src = src
+  source.type = 'video/mp4'
+  element.appendChild(source)
+}
+const initVideo = (element, src) => {
+  if (!isMobile.any()) {
+    addSourceToVideo(element, src.dataset.desktopVid)
+  } else {
+    addSourceToVideo(element, src.dataset.mobileVid)
+  }
 }
 
+// fullscreen api
 const openfullscreen = () => {
   // Trigger fullscreen
   if (document.getElementById('parent').requestFullscreen) {
@@ -28,7 +42,6 @@ const openfullscreen = () => {
     document.getElementById('parent').msRequestFullscreen()
   }
 }
-
 const closefullscreen = () => {
   if (document.exitFullscreen) {
     document.exitFullscreen()
@@ -47,6 +60,7 @@ const closefullscreen = () => {
   }
 }
 
+// check if browser is mobile
 const isMobile = {
   Android: function () {
     return navigator.userAgent.match(/Android/i)
@@ -73,45 +87,46 @@ const isMobile = {
     )
   },
 }
-const gsapV = videoWrap => {
-  if (window.innerHeight < window.innerWidth) {
-    gsap.to(
-      videoWrap,
-      {
-        position: 'fixed',
-        width: '100vw',
-        height: '100vh',
-        rotate: 0,
-        duration: 0,
-        delay: 0,
-        xPercent: 0,
-        top: 0,
-        right: 0,
-        yPercent: 0,
-        borderRadius: 0,
-      },
-      0
-    )
-  } else {
-    gsap.to(
-      videoWrap,
-      {
-        position: 'fixed',
-        width: '100vh',
-        height: '100vw',
-        rotate: 90,
-        duration: 0,
-        delay: 0,
-        xPercent: 50,
-        yPercent: -50,
-        top: '50%',
-        right: '50%',
-        borderRadius: 0,
-      },
-      0
-    )
-  }
-}
+
+// const gsapV = videoWrap => {
+//   if (window.innerHeight < window.innerWidth) {
+//     gsap.to(
+//       videoWrap,
+//       {
+//         position: 'fixed',
+//         width: '100vw',
+//         height: '100vh',
+//         rotate: 0,
+//         duration: 0,
+//         delay: 0,
+//         xPercent: 0,
+//         top: 0,
+//         right: 0,
+//         yPercent: 0,
+//         borderRadius: 0,
+//       },
+//       0
+//     )
+//   } else {
+//     gsap.to(
+//       videoWrap,
+//       {
+//         position: 'fixed',
+//         width: '100vh',
+//         height: '100vw',
+//         rotate: 90,
+//         duration: 0,
+//         delay: 0,
+//         xPercent: 50,
+//         yPercent: -50,
+//         top: '50%',
+//         right: '50%',
+//         borderRadius: 0,
+//       },
+//       0
+//     )
+//   }
+// }
 
 // const getScreenOrientation = el => {
 //   const tl = gsap.timeline()
@@ -134,7 +149,15 @@ const gsapV = videoWrap => {
 //   }
 // }
 
+// =============================================================================
+
+// for fullpage.js
+if (!document.getElementById('fullpage')) {
+  animItems()
+}
+
 document.addEventListener('DOMContentLoaded', function () {
+  // for low power mode
   const videos = []
   const videoYC = document.querySelector('.section_first video')
   const videoMP = document.querySelector('.video__section video')
@@ -163,13 +186,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  // gsap defaults
   gsap.defaults({
     duration: 1,
     delay: 0.5,
   })
 
-  gsap.registerPlugin(ScrollTrigger)
+  // gsap.registerPlugin(ScrollTrigger)
 
+  // main animation
   if (document.querySelector('.section_animate')) {
     const sectionAnimate = document.querySelector('.section_animate')
     const sectionAnimateWrap = sectionAnimate.querySelector('.section_wrap')
@@ -317,6 +342,7 @@ document.addEventListener('DOMContentLoaded', function () {
                   document.querySelector('body').style.overflow = 'auto'
                 }
                 sectionAnimate.classList.add('_hidden')
+                sectionAnimate.style.display = 'none'
               },
             },
             0
@@ -327,6 +353,7 @@ document.addEventListener('DOMContentLoaded', function () {
     )
   }
 
+  // yearcolor animation
   if (document.querySelector('.section_first')) {
     const videoSection = document.querySelector('.section_first')
     const video = document.getElementById('video-collection')
@@ -362,20 +389,6 @@ document.addEventListener('DOMContentLoaded', function () {
         0
       )
       gsap.set(closeBtn, { opacity: 0, visibility: 'hidden' }, 0)
-    }
-    const addSourceToVideo = (element, src) => {
-      const source = document.createElement('source')
-      source.src = src
-      source.type = 'video/mp4'
-      element.appendChild(source)
-    }
-    const initVideo = (element, src) => {
-      const windowWidth = window.innerWidth
-      if (!isMobile.any()) {
-        addSourceToVideo(element, src.dataset.desktopVid)
-      } else {
-        addSourceToVideo(element, src.dataset.mobileVid)
-      }
     }
     const gsapInit = () => {
       gsap.to(videoWrap, { opacity: 1, visibility: 'visible', delay: 2 })
@@ -415,13 +428,10 @@ document.addEventListener('DOMContentLoaded', function () {
               videoWrap,
               {
                 position: 'fixed',
-                width: '100vh',
-                height: '100vw',
-                yPercent: -50,
-                rotate: 90,
-                xPercent: 50,
-                right: '50%',
-                top: '50%',
+                yPercent: 0,
+                xPercent: 0,
+                width: '100vw',
+                height: '100vh',
                 'border-radius': 0,
                 duration: 0,
                 delay: 0,
@@ -437,10 +447,10 @@ document.addEventListener('DOMContentLoaded', function () {
               },
               0
             )
-            window.addEventListener('resize', function () {
-              gsapV(videoWrap)
-            })
-            gsapV(videoWrap)
+            // window.addEventListener('resize', function () {
+            //   gsapV(videoWrap)
+            // })
+            // gsapV(videoWrap)
           } else if (
             e.target.closest('.section_first #close-video') &&
             videoSection.classList.contains('_fw', 'mobile')
@@ -464,9 +474,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 position: 'absolute',
                 yPercent: -23,
                 xPercent: 38,
-                top: 0,
-                rotate: 0,
-                right: 0,
                 width: '89.3rem',
                 height: '89.3rem',
                 'border-radius': '50%',
@@ -495,9 +502,6 @@ document.addEventListener('DOMContentLoaded', function () {
                   position: 'absolute',
                   yPercent: -23,
                   xPercent: 38,
-                  top: 0,
-                  rotate: 0,
-                  right: 0,
                   width: '89.3rem',
                   height: '89.3rem',
                   'border-radius': '50%',
@@ -622,6 +626,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initVideo(video, video)
   }
 
+  // philosophy page
   if (document.querySelector('.philosophy__section-sixth')) {
     const videoSection = document.querySelector('.philosophy__section-sixth')
     const videoWrap = videoSection.querySelector('.container-video')
@@ -697,13 +702,8 @@ document.addEventListener('DOMContentLoaded', function () {
             videoWrap,
             {
               position: 'fixed',
-              width: '100vh',
-              height: '100vw',
-              yPercent: -50,
-              rotate: 90,
-              xPercent: 50,
-              right: '50%',
-              top: '50%',
+              width: '100vw',
+              height: '100vh',
               'border-radius': 0,
               duration: 0,
               delay: 0,
@@ -711,9 +711,11 @@ document.addEventListener('DOMContentLoaded', function () {
             0
           )
           tl1.to('body', { overflow: 'hidden' }, 0)
-          gsapV(videoWrap)
+          // gsapV(videoWrap)
           window.addEventListener('resize', function () {
-            gsapV(videoWrap)
+            // gsapV(videoWrap)
+
+            openfullscreen()
           })
         }
         if (!isMobile.any()) {
@@ -765,12 +767,7 @@ document.addEventListener('DOMContentLoaded', function () {
           videoWrap,
           {
             position: 'static',
-            top: 0,
-            right: 0,
             width: '100%',
-            xPercent: 0,
-            rotate: 0,
-            yPercent: 0,
             height: '99.5rem',
             'z-index': 1,
             duration: 0,
@@ -779,6 +776,7 @@ document.addEventListener('DOMContentLoaded', function () {
         )
         tl2.to('body', { overflow: 'visible' }, 0)
         window.addEventListener('resize', function () {
+          closefullscreen()
           tl2.to(
             videoWrap,
             {
@@ -800,209 +798,277 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   }
 
-  if (document.getElementById('fullpage')) {
-    if (window.matchMedia('(min-width:767.98px)').matches) {
-      gsap.set('.fadeIn', { opacity: 0 })
-      gsap.set('.fadeInLeft', { opacity: 0, xPercent: -100 })
-      gsap.set('.fadeInDown', { opacity: 0, yPercent: -100 })
-      gsap.set('.zoomIn', { opacity: 0, scale: 0 })
-      ScrollTrigger.observe({
-        type: 'wheel,touch,scroll,pointer',
-        target: '.section.active',
-        onChange: () => {
-          if (document.querySelector('.main__section-first.active')) {
-            swiperMainSection1.autoplay.start()
-            gsap.to('.swiper_main-section-1', {
-              opacity: 1,
-              yPercent: 0,
-              delay: 0.5,
-            }),
-              gsap.to('.title1_section-1', {
-                opacity: 1,
-                xPercent: 0,
-                delay: 0.5,
-              }),
-              gsap.to('.title2_section-1', { opacity: 1, delay: 1.5 }),
-              gsap.to('.title3_section-1', { opacity: 1, delay: 1.8 }),
-              gsap.to('.btn_section-1', { opacity: 1, delay: 2 })
-          }
-          if (document.querySelector('.main__section-second.active')) {
-            swiperMainSection2.autoplay.start()
-            gsap.to('.main__section-second .content_left', {
-              opacity: 1,
-            }),
-              gsap.to('.main__section-second .icon_wrap', {
-                opacity: 1,
-              })
-            gsap.to('.main__section-content .title_mobile', {
-              opacity: 1,
-              yPercent: 0,
-            }),
-              gsap.to('.main__section-second .content_right .title', {
-                opacity: 1,
-                yPercent: 1,
-              }),
-              gsap.to('.main__section-second .swiper-slide .subtitle', {
-                opacity: 1,
-                delay: 1.3,
-              }),
-              gsap.to('.main__section-second .swiper-slide .text', {
-                opacity: 1,
-                delay: 1.5,
-              })
-            gsap.to('.main__section-second  .btn', {
-              opacity: 1,
-              delay: 1.8,
-            })
-          }
-          if (document.querySelector('.main__section-third.active')) {
-            swiperMainSection3.autoplay.start()
-            gsap.to('.main__section-third .left_block .text', {
-              opacity: 1,
-              yPercent: 0,
-            })
-            gsap.to('.main__section-third .left_block .subtitle_span', {
-              opacity: 1,
-              delay: 1.3,
-            })
-            gsap.to('.main__section-third .left_block .subtitle', {
-              opacity: 1,
-              delay: 1.3,
-            })
-            gsap.to('.main__section-third .left_block .btn', {
-              opacity: 1,
-              delay: 1.5,
-            })
-            gsap.to('.main__section-third .right_block .img_block', {
-              opacity: 1,
-              scale: 1,
-            })
-            gsap.to('.main__section-third .swiper-pagination', {
-              opacity: 1,
-              delay: 1.5,
-            })
-          }
-          if (document.querySelector('.main__section-fourth.active')) {
-            swiperMainSection4.autoplay.start()
-            gsap.to('.main__section-fourth .photo_after', {
-              opacity: 1,
-              xPercent: 0,
-            })
-            gsap.to('.main__section-fourth .photo_before', {
-              opacity: 1,
-            })
-            gsap.to('.main__section-fourth .right_block .title', {
-              opacity: 1,
-              yPercent: 0,
-            })
-            gsap.to('.main__section-fourth .right_block .pots-value', {
-              opacity: 1,
-              delay: 1.3,
-            })
-            gsap.to('.main__section-fourth .right_block .text_block', {
-              opacity: 1,
-              delay: 1.5,
-            })
-          }
-          if (document.querySelector('.main__section-fifth.active')) {
-            gsap.to('.main__section-fifth .container', {
-              opacity: 1,
-              yPercent: 0,
-            })
-            gsap.to('.main__section-fifth .main__section-content', {
-              opacity: 1,
-              delay: 1.5,
-            })
-          }
-          if (document.querySelector('.main__section-sixth.active')) {
-            gsap.to('.main__section-sixth .circles_left', {
-              opacity: 1,
-            })
-            gsap.to('.main__section-sixth .circles_center', {
-              opacity: 1,
-              scale: 1,
-            })
-            gsap.to('.main__section-sixth .circles_right', {
-              opacity: 1,
-            })
-          }
-        },
-        preventDefault: true,
-      })
-    } else {
-      animItems()
-    }
-  }
+  // if (document.getElementById('fullpage')) {
+  //   if (window.matchMedia('(min-width:767.98px)').matches) {
+  //     gsap.set('.fadeIn', { opacity: 0 })
+  //     gsap.set('.fadeInLeft', { opacity: 0, xPercent: -100 })
+  //     gsap.set('.fadeInDown', { opacity: 0, yPercent: -100 })
+  //     gsap.set('.zoomIn', { opacity: 0, scale: 0 })
+  //     ScrollTrigger.observe({
+  //       type: 'wheel,touch,scroll,pointer',
+  //       target: '.section.active',
+  //       onChange: () => {
+  //         if (document.querySelector('.main__section-first.active')) {
+  //           swiperMainSection1.autoplay.start()
+  //           gsap.to('.swiper_main-section-1', {
+  //             opacity: 1,
+  //             yPercent: 0,
+  //             delay: 0.5,
+  //           }),
+  //             gsap.to('.title1_section-1', {
+  //               opacity: 1,
+  //               xPercent: 0,
+  //               delay: 0.5,
+  //             }),
+  //             gsap.to('.title2_section-1', { opacity: 1, delay: 1.5 }),
+  //             gsap.to('.title3_section-1', { opacity: 1, delay: 1.8 }),
+  //             gsap.to('.btn_section-1', { opacity: 1, delay: 2 })
+  //         }
+  //         if (document.querySelector('.main__section-second.active')) {
+  //           swiperMainSection2.autoplay.start()
+  //           gsap.to('.main__section-second .content_left', {
+  //             opacity: 1,
+  //           }),
+  //             gsap.to('.main__section-second .icon_wrap', {
+  //               opacity: 1,
+  //             })
+  //           gsap.to('.main__section-content .title_mobile', {
+  //             opacity: 1,
+  //             yPercent: 0,
+  //           }),
+  //             gsap.to('.main__section-second .content_right .title', {
+  //               opacity: 1,
+  //               yPercent: 1,
+  //             }),
+  //             gsap.to('.main__section-second .swiper-slide .subtitle', {
+  //               opacity: 1,
+  //               delay: 1.3,
+  //             }),
+  //             gsap.to('.main__section-second .swiper-slide .text', {
+  //               opacity: 1,
+  //               delay: 1.5,
+  //             })
+  //           gsap.to('.main__section-second  .btn', {
+  //             opacity: 1,
+  //             delay: 1.8,
+  //           })
+  //         }
+  //         if (document.querySelector('.main__section-third.active')) {
+  //           swiperMainSection3.autoplay.start()
+  //           gsap.to('.main__section-third .left_block .text', {
+  //             opacity: 1,
+  //             yPercent: 0,
+  //           })
+  //           gsap.to('.main__section-third .left_block .subtitle_span', {
+  //             opacity: 1,
+  //             delay: 1.3,
+  //           })
+  //           gsap.to('.main__section-third .left_block .subtitle', {
+  //             opacity: 1,
+  //             delay: 1.3,
+  //           })
+  //           gsap.to('.main__section-third .left_block .btn', {
+  //             opacity: 1,
+  //             delay: 1.5,
+  //           })
+  //           gsap.to('.main__section-third .right_block .img_block', {
+  //             opacity: 1,
+  //             scale: 1,
+  //           })
+  //           gsap.to('.main__section-third .swiper-pagination', {
+  //             opacity: 1,
+  //             delay: 1.5,
+  //           })
+  //         }
+  //         if (document.querySelector('.main__section-fourth.active')) {
+  //           swiperMainSection4.autoplay.start()
+  //           gsap.to('.main__section-fourth .photo_after', {
+  //             opacity: 1,
+  //             xPercent: 0,
+  //           })
+  //           gsap.to('.main__section-fourth .photo_before', {
+  //             opacity: 1,
+  //           })
+  //           gsap.to('.main__section-fourth .right_block .title', {
+  //             opacity: 1,
+  //             yPercent: 0,
+  //           })
+  //           gsap.to('.main__section-fourth .right_block .pots-value', {
+  //             opacity: 1,
+  //             delay: 1.3,
+  //           })
+  //           gsap.to('.main__section-fourth .right_block .text_block', {
+  //             opacity: 1,
+  //             delay: 1.5,
+  //           })
+  //         }
+  //         if (document.querySelector('.main__section-fifth.active')) {
+  //           gsap.to('.main__section-fifth .container', {
+  //             opacity: 1,
+  //             yPercent: 0,
+  //           })
+  //           gsap.to('.main__section-fifth .main__section-content', {
+  //             opacity: 1,
+  //             delay: 1.5,
+  //           })
+  //         }
+  //         if (document.querySelector('.main__section-sixth.active')) {
+  //           gsap.to('.main__section-sixth .circles_left', {
+  //             opacity: 1,
+  //           })
+  //           gsap.to('.main__section-sixth .circles_center', {
+  //             opacity: 1,
+  //             scale: 1,
+  //           })
+  //           gsap.to('.main__section-sixth .circles_right', {
+  //             opacity: 1,
+  //           })
+  //         }
+  //       },
+  //       preventDefault: true,
+  //     })
+  //   } else {
+  //     animItems()
+  //   }
+  // }
 
+  // video section
   if (document.querySelector('.video__section')) {
     const videoWrap = document.querySelector('.video__section .section_video')
+    const video = document.querySelector('.video__section video')
     const toggleBtn = document.querySelector('.rotate-icon')
+    gsap.set(videoWrap, {
+      position: 'relative',
+      'z-index': 2,
+      top: 0,
+      right: 0,
+      width: '100%',
+      height: '100%',
+      rotate: 0,
+      xPercent: 0,
+      yPercent: 0,
+    })
+    gsap.set(
+      '.video__section .rotate-icon',
+      {
+        bottom: '3rem',
+        right: '3rem',
+      },
+      0
+    )
     if (isMobile.any()) {
-      gsap.to('.video__section .rotate-icon', { display: 'block' })
+      gsap.to('.video__section .rotate-icon', {
+        display: 'block',
+      })
       const tl1 = gsap.timeline()
       const tl2 = gsap.timeline()
       toggleBtn.addEventListener('click', function () {
         if (!videoWrap.classList.contains('_fs')) {
+          tl2.kill()
           openfullscreen()
           videoWrap.classList.add('_fs')
           document.querySelector('body').style.overflow = 'hidden'
-          tl2.kill()
+          // screen.orientation.lock('landscape')
           tl1.to(
             videoWrap,
             {
               position: 'fixed',
               'z-index': 200,
-              top: '50%',
-              right: '50%',
-              width: '100vh',
-              height: '100vw',
-              rotate: 90,
-              xPercent: 50,
-              yPercent: -50,
+              width: '100vw',
+              height: '100vh',
               duration: 0,
               delay: 0,
             },
             0
           )
-          gsapV(videoWrap)
-          window.addEventListener('resize', function () {
-            gsapV(videoWrap)
-          })
+
+          tl1.to(
+            video,
+            {
+              height: '100%',
+              duration: 0,
+              delay: 0,
+            },
+            0
+          )
+          tl1.to(
+            '.video__section .rotate-icon',
+            {
+              bottom: '6rem',
+              right: '14rem',
+              duration: 0,
+              delay: 0,
+            },
+            0
+          )
+          if (window.innerHeight < window.innerWidth) {
+            openfullscreen()
+            // setTimeout(function () {
+            //   window.scrollTo(0, 1)
+            // }, 100)
+          }
+          // window.addEventListener('resize', function () {
+          //   if (window.innerHeight < window.innerWidth) {
+          //     // setTimeout(function () {
+          //     //   window.scrollTo(0, 1)
+          //     // }, 100)
+          //   }
+          // })
         } else {
+          tl2.kill()
           closefullscreen()
           videoWrap.classList.remove('_fs')
           document.querySelector('body').style.overflow = 'auto'
-          tl2.kill()
+          // screen.orientation.unlock()
           tl1.to(
             videoWrap,
             {
               position: 'relative',
               'z-index': 2,
-              top: 0,
-              right: 0,
               width: '100%',
               height: '100%',
-              rotate: 0,
-              xPercent: 0,
-              yPercent: 0,
+              duration: 0,
+              delay: 0,
+            },
+            0
+          )
+          tl1.to(
+            video,
+            {
+              height: '99.5rem',
+              duration: 0,
+              delay: 0,
+            },
+            0
+          )
+          tl1.to(
+            '.video__section .rotate-icon',
+            {
+              bottom: '3rem',
+              right: '3rem',
               duration: 0,
               delay: 0,
             },
             0
           )
           window.addEventListener('resize', function () {
+            closefullscreen()
             tl1.to(
               videoWrap,
               {
                 position: 'relative',
                 'z-index': 2,
-                top: 0,
-                right: 0,
                 width: '100%',
                 height: '100%',
-                rotate: 0,
-                xPercent: 0,
-                yPercent: 0,
+                duration: 0,
+                delay: 0,
+              },
+              0
+            )
+            tl1.to(
+              video,
+              {
+                height: '99.5rem',
                 duration: 0,
                 delay: 0,
               },
@@ -1012,5 +1078,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       })
     }
+
+    initVideo(video, video)
   }
 })

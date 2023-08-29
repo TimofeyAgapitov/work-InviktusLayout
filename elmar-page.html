@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="./scss/edits.css" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="./js/ac_quicktime.js" type="text/javascript"></script>
   </head>
   <body>
@@ -30,8 +29,7 @@
             <img
               class="feedback-icon"
               src="img/header/feedback-icon.svg"
-              alt="feedback"
-            />
+              alt="feedback" />
           </li>
           <li class="icon">
             <img src="img/header/cart-icon.svg" alt="cart" />
@@ -42,7 +40,6 @@
           <label class="burger-btn" for="burger-toggle">
             <span></span>
           </label>
-
           <ul class="burgerbox">
             <li class="burger-item">Цвет года</li>
             <li class="burger-item">Решения</li>
@@ -57,8 +54,7 @@
                 class="feedback-icon"
                 style="width: 6rem; height: 6rem"
                 src="./img/header/feedback-icon.svg"
-                alt=""
-              />
+                alt="" />
             </li>
           </ul>
         </div>
@@ -67,8 +63,7 @@
             <img
               class="modal_close-icon"
               src="./img/header/modal_close.svg"
-              alt=""
-            />
+              alt="" />
             <div class="modal_content">
               <h4 class="modal_title">У вас есть вопросы?</h4>
               <p class="modal_text">
@@ -100,40 +95,42 @@
         </div>
       </div>
     </header>
-    <main>
+    <main id="parent">
       <section class="video__section">
         <div class="section_video">
-          <video class="desktop" autoplay loop muted playsinline>
-            <source
-              src="./img/video_section-first/section_first-videov2.mp4"
-              type="video/mp4"
-            />
-            <source
-            src="./video/webm/section_first-videov2.webm"
-            type="video/webm"
-            />
+          <video
+            data-video
+            loop
+            muted
+            playsinline
+            data-desktop-vid="./img/video_section-first/section_first-videov2.mp4"
+            data-mobile-vid="./img/video_section-first/section_first-video-mobile.mp4">
+            <!-- <source
+                src="./img/video_section-first/section_first-videov2.mp4"
+                type="video/mp4" /> -->
+            <!-- <source
+                src="./video/webm/section_first-videov2.webm"
+                type="video/webm" /> -->
           </video>
-          <video class="mobile" autoplay loop muted playsinline>
-            <source
-              src="./img/video_section-first/section_first-video-mobile.mp4"
-              type="video/mp4"
-            />
-            <source
-            src="./video/webm/section_first-video-mobile.webm"
-            type="video/webm"
-            />
-          </video>
+          <!-- <video class="mobile" loop muted playsinline>
+              <source
+                src="./img/video_section-first/section_first-video-mobile.mp4"
+                type="video/mp4" />
+              <source
+                src="./video/webm/section_first-video-mobile.webm"
+                type="video/webm" />
+            </video> -->
+          <button id="fs" type="button" class="rotate-icon">
+            <img aria-hidden="true" src="./img/rotate-screen.svg" alt="" />
+          </button>
         </div>
-        <div class="container"></div>
       </section>
-
       <section class="elmar__section-first">
         <div class="container">
           <div class="elmar__section-background">
             <img
               src="./img/elmar_section-first/section_first-background.webp"
-              alt=""
-            />
+              alt="" />
           </div>
           <div class="elmar__section-content">
             <div class="content_title">
@@ -145,7 +142,6 @@
           </div>
         </div>
       </section>
-
       <section class="elmar__section-second">
         <div class="container">
           <div class="elmar__section-content">
@@ -167,23 +163,19 @@
                   autoplay
                   loop
                   muted
-                  playsinline
-                >
+                  playsinline>
                   <source
                     src="./img/elmar_section-second/section_second-videov2.mp4"
-                    type="video/mp4"
-                  />
+                    type="video/mp4" />
                   <source
-                  src="./video/webm/section_second-videov2.webm"
-                  type="video/webm"
-                  />
+                    src="./video/webm/section_second-videov2.webm"
+                    type="video/webm" />
                 </video>
               </div>
             </div>
           </div>
         </div>
       </section>
-
       <section class="elmar__section-third">
         <div class="container">
           <div class="elmar__section-content">
@@ -252,8 +244,7 @@
                     <img
                       class="chaos"
                       src="./img/elmar_section-third/section_third-chaos.svg"
-                      alt=""
-                    />
+                      alt="" />
                   </div>
                   <p class="content_color-text">
                     Капсула Chaos&nbsp;&mdash; это сбалансированные цвета для
@@ -268,22 +259,19 @@
                 <div class="content_bottom-left">
                   <p
                     class="content_driver-text outlined-text wow animate__fadeInDown animate__delay-1s"
-                    data-wow-delay="0.1s"
-                  >
+                    data-wow-delay="0.1s">
                     цвет драйвер
                   </p>
                 </div>
                 <div class="content_bottom-right">
                   <h2
                     class="content_title wow animate__fadeIn animate__delay-1s"
-                    data-wow-delay="0.3s"
-                  >
+                    data-wow-delay="0.3s">
                     Very Lime
                   </h2>
                   <p
                     class="content_text wow animate__fadeIn animate__delay-1s"
-                    data-wow-delay="0.3s"
-                  >
+                    data-wow-delay="0.3s">
                     Этот цвет мгновенно наполнит комнату энергией, привнося
                     свежую и&nbsp;игривую атмосферу.
                   </p>
@@ -291,32 +279,27 @@
                     class="blob blob-lime wow animate__zoomIn animate__delay-1s"
                     data-wow-delay="0.3s"
                     src="./img/elmar_section-third/section_third-blob_lime.webp"
-                    alt=""
-                  />
+                    alt="" />
                   <img
                     style="width: 27.9rem"
                     src="./img/elmar_section-third/decoration-image-1.webp"
                     alt=""
-                    class="decoration decoration-1"
-                  />
+                    class="decoration decoration-1" />
                   <img
                     style="width: 11.2rem"
                     src="./img/elmar_section-third/decoration-image-2.webp"
                     alt=""
-                    class="decoration decoration-2"
-                  />
+                    class="decoration decoration-2" />
                   <img
                     style="width: 19rem"
                     src="./img/elmar_section-third/decoration-image-3.webp"
                     alt=""
-                    class="decoration decoration-3"
-                  />
+                    class="decoration decoration-3" />
                   <img
                     style="width: 16.8rem"
                     src="./img/elmar_section-third/decoration-image-4.webp"
                     alt=""
-                    class="decoration decoration-4"
-                  />
+                    class="decoration decoration-4" />
                 </div>
               </div>
             </div>
@@ -385,8 +368,7 @@
                     <img
                       class="permanence"
                       src="./img/elmar_section-third/section_third-permanence.svg"
-                      alt=""
-                    />
+                      alt="" />
                   </div>
                   <p class="content_color-text">
                     Капсула Permanence вызывает ощущение дзен-спокойствия
@@ -399,22 +381,19 @@
                 <div class="content_bottom-left">
                   <p
                     class="content_driver-text outlined-text wow animate__fadeInDown animate__delay-1s"
-                    data-wow-delay="0.1s"
-                  >
+                    data-wow-delay="0.1s">
                     цвет драйвер
                   </p>
                 </div>
                 <div class="content_bottom-right">
                   <h2
                     class="content_title wow animate__fadeIn animate__delay-1s"
-                    data-wow-delay="0.3s"
-                  >
+                    data-wow-delay="0.3s">
                     Dust Mauve
                   </h2>
                   <p
                     class="content_text wow animate__fadeIn animate__delay-1s"
-                    data-wow-delay="0.3s"
-                  >
+                    data-wow-delay="0.3s">
                     Универсальный и&nbsp;утонченный цвет, обеспечивает
                     нейтральность, которая допускает множество комбинаций.
                   </p>
@@ -422,26 +401,22 @@
                     class="blob blob-grey wow animate__zoomIn animate__delay-1s"
                     data-wow-delay="0.3s"
                     src="./img/elmar_section-third/section_third-blob_grey.webp"
-                    alt=""
-                  />
+                    alt="" />
                   <img
                     style="width: 42.4rem"
                     src="./img/elmar_section-third/decoration-image-5.webp"
                     alt=""
-                    class="decoration decoration-5"
-                  />
+                    class="decoration decoration-5" />
                   <img
                     style="width: 60rem"
                     src="./img/elmar_section-third/decoration-image-6.webp"
                     alt=""
-                    class="decoration decoration-6"
-                  />
+                    class="decoration decoration-6" />
                   <img
                     style="width: 11.7rem"
                     src="./img/elmar_section-third/decoration-image-7.webp"
                     alt=""
-                    class="decoration decoration-7"
-                  />
+                    class="decoration decoration-7" />
                 </div>
               </div>
             </div>
@@ -510,8 +485,7 @@
                     <img
                       class="clarity"
                       src="./img/elmar_section-third/section_third-clarity.svg"
-                      alt=""
-                    />
+                      alt="" />
                   </div>
                   <p class="content_color-text">
                     Капсула Clarity&nbsp;&mdash; современный взгляд
@@ -525,22 +499,19 @@
                 <div class="content_bottom-left">
                   <p
                     class="content_driver-text outlined-text wow animate__fadeInDown animate__delay-1s"
-                    data-wow-delay="0.1s"
-                  >
+                    data-wow-delay="0.1s">
                     цвет драйвер
                   </p>
                 </div>
                 <div class="content_bottom-right">
                   <h2
                     class="content_title wow animate__fadeIn animate__delay-1s"
-                    data-wow-delay="0.3s"
-                  >
+                    data-wow-delay="0.3s">
                     Still Red
                   </h2>
                   <p
                     class="content_text wow animate__fadeIn animate__delay-1s"
-                    data-wow-delay="0.3s"
-                  >
+                    data-wow-delay="0.3s">
                     Винтажноприпылённый красный цвет естественного тона отражает
                     связь с&nbsp;природой, выражает силу и&nbsp;страсть.
                   </p>
@@ -548,26 +519,22 @@
                     class="blob blob-red wow animate__zoomIn animate__delay-1s"
                     data-wow-delay="0.3s"
                     src="./img/elmar_section-third/section_third-blob_red.webp"
-                    alt=""
-                  />
+                    alt="" />
                   <img
                     style="width: 17.8rem"
                     src="./img/elmar_section-third/decoration-image-8.webp"
                     alt=""
-                    class="decoration decoration-8"
-                  />
+                    class="decoration decoration-8" />
                   <img
                     style="width: 11.6rem"
                     src="./img/elmar_section-third/decoration-image-9.webp"
                     alt=""
-                    class="decoration decoration-9"
-                  />
+                    class="decoration decoration-9" />
                   <img
                     style="width: 10.5rem"
                     src="./img/elmar_section-third/decoration-image-10.webp"
                     alt=""
-                    class="decoration decoration-10"
-                  />
+                    class="decoration decoration-10" />
                 </div>
               </div>
             </div>
@@ -636,8 +603,7 @@
                     <img
                       class="waterdrive"
                       src="./img/elmar_section-third/section_thrid-waterdrivev2.svg"
-                      alt=""
-                    />
+                      alt="" />
                   </div>
                   <p class="content_color-text">
                     Капсула Water напоминает нам о&nbsp;незыблемости этого мира.
@@ -651,22 +617,19 @@
                 <div class="content_bottom-left">
                   <p
                     class="content_driver-text outlined-text wow animate__fadeInDown animate__delay-1s"
-                    data-wow-delay="0.1s"
-                  >
+                    data-wow-delay="0.1s">
                     цвет драйвер
                   </p>
                 </div>
                 <div class="content_bottom-right">
                   <h2
                     class="content_title wow animate__fadeIn animate__delay-1s"
-                    data-wow-delay="0.3s"
-                  >
+                    data-wow-delay="0.3s">
                     Atlantis
                   </h2>
                   <p
                     class="content_text wow animate__fadeIn animate__delay-1s"
-                    data-wow-delay="0.3s"
-                  >
+                    data-wow-delay="0.3s">
                     Яркий и&nbsp;жизнерадостный цвет олицетворяетздоровье,
                     исцеление, спокойствие, понимание и&nbsp;мягкость.
                   </p>
@@ -674,26 +637,22 @@
                     class="blob blob-blue wow animate__zoomIn animate__delay-1s"
                     data-wow-delay="0.3s"
                     src="./img/elmar_section-third/section_third-blob_blue.webp"
-                    alt=""
-                  />
+                    alt="" />
                   <img
                     style="width: 40rem"
                     src="./img/elmar_section-third/decoration-image-11.webp"
                     alt=""
-                    class="decoration decoration-11"
-                  />
+                    class="decoration decoration-11" />
                   <img
                     style="width: 16.2rem"
                     src="./img/elmar_section-third/decoration-image-12.webp"
                     alt=""
-                    class="decoration decoration-12"
-                  />
+                    class="decoration decoration-12" />
                   <img
                     style="width: 9rem"
                     src="./img/elmar_section-third/decoration-image-13.webp"
                     alt=""
-                    class="decoration decoration-13"
-                  />
+                    class="decoration decoration-13" />
                 </div>
               </div>
             </div>
@@ -707,8 +666,7 @@
           style="width: 17rem"
           class="footer_logotype"
           src="img/footer/footer_logotype-desktop.svg"
-          alt="logotype"
-        />
+          alt="logotype" />
         <div class="footer_content">
           <span class="title">Тот самый идеальный цвет</span>
           <ul class="lists_info">
@@ -755,30 +713,30 @@
         <img
           class="footer_logotype-mobile"
           src="img/footer/footer_logotype-mobile.svg"
-          alt=""
-        />
+          alt="" />
         <img
           class="decoration_left"
           src="img/footer/footer_decoration_left.svg"
-          alt="decoration"
-        />
+          alt="decoration" />
         <img
           class="decoration_right"
           src="img/footer/footer_decoration_right.svg"
-          alt="decoration"
-        />
+          alt="decoration" />
         <img
           class="decoration_mobile"
           src="img/footer/footer_decoration-mobile-v2.svg"
-          alt=""
-        />
+          alt="" />
       </div>
     </footer>
+    <div class="spacer" style="height: 1px"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="./js/jquery.js"></script>
     <script src="./js/jquery.nice-select.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="./js/wow.min.js"></script>
-    <script  src="./js/main.js"></script>
+    <script type="module" src="./js/animations.js"></script>
+    <script src="./js/main.js"></script>
   </body>
 </html>
